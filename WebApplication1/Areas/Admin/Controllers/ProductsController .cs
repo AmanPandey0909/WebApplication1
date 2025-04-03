@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModel;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using Utillity;
 
 
 namespace WebApplication1.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class ProductsController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -47,13 +50,14 @@ namespace WebApplication1.Areas.Admin.Controllers
             {
                 //update
                 productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                
                 return View(productVM);
             }
 
 
 
         }
-        [HttpPost]
+       
 
         [HttpPost]
         public IActionResult Upsert(ProductVm productVM, IFormFile? file)
@@ -109,6 +113,8 @@ namespace WebApplication1.Areas.Admin.Controllers
                 }
 
                 _unitOfWork.Save();
+
+
                 TempData["success"] = "Product saved successfully!";
                 return RedirectToAction("Index");
             }

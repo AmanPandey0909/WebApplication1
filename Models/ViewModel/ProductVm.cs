@@ -15,3 +15,4 @@ namespace Models.ViewModel
         public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }
+ 
