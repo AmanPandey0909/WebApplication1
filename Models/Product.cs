@@ -22,7 +22,7 @@ namespace Models
         public string Author { get; set; }
         
         [Display(Name = "List Price")]
-        [Range(1, 1000)]
+        [Range(1, 100000)]
         public double ListPrice { get; set; }
 
         [Required]
@@ -38,7 +38,7 @@ namespace Models
 
         [Required]
         [Display(Name = "Price for 100+")]
-        [Range(1, 1000)]
+        [Range(1, 100000)]
         public double Price100 { get; set; }
 
         public int CategoryId { get; set; }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Utillity;
 
 
-namespace WebApplication1.Areas.Admin.Controllers
+namespace PageHaven.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles =SD.Role_Admin)]

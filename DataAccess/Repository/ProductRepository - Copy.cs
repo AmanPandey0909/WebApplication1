@@ -16,13 +16,6 @@ namespace DataAccess.Repository
         {
             _db = db;
         }
-
-
-
-
-
-
-
         public void Update(Product obj)
         {
             var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
