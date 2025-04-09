@@ -3,12 +3,26 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var userId = user?.Id;
+    var userName = user?.UserName;
+
+    // Create profile image URL with a cache-busting version query
+    var profileImageVersion = DateTime.Now.Ticks;
+    var profileImagePath = $"/images/profiles/{userId}.jpg?v={profileImageVersion}";
+}
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
+             <img src="@profileImagePath" onerror="this.src='/images/profiles/defaults.jpg'" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px;" />
+
+    </li>
+    <li class="nav-item">
         <a id="manage" class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>
+    
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-link  border-0">Logout</button>
